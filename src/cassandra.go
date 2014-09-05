@@ -35,7 +35,7 @@ var printUsers = func(cassandra *gocql.Session) {
 type WithSession func(crud CRUD)
 
 func createSession()(WithSession) {
-	cluster := gocql.NewCluster("172.17.0.187")	
+	cluster := gocql.NewCluster("172.17.0.2")	
 	cluster.Keyspace = "golang"
 	cluster.Consistency = gocql.Quorum
 
@@ -51,7 +51,7 @@ func randName(n int8)(string) {
 
 	b := make([]rune, n)
     random := rand.New(rand.NewSource(time.Now().UTC().UnixNano()))
-    // rand.Seed( time.Now().UTC().UnixNano())
+    
 	for i := range b {
 		b[i] = letters[random.Intn(len(letters))]
 	}
@@ -59,9 +59,10 @@ func randName(n int8)(string) {
 }
 
 func main() {
+
     withSession := createSession()
 
-    // fmt.Printf("%T", withSession)
+    //fmt.Printf("%T", withSession)
 
     withSession(insertUser(randName(7)))
 
