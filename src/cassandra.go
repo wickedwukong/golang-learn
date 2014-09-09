@@ -35,7 +35,7 @@ var printUsers = func(cassandra *gocql.Session) {
 type WithSession func(crud CRUD)
 
 func createSession()(WithSession) {
-	cluster := gocql.NewCluster("172.17.0.2")	
+	cluster := gocql.NewCluster("172.17.0.21")	
 	cluster.Keyspace = "golang"
 	cluster.Consistency = gocql.Quorum
 
